@@ -21,11 +21,11 @@ Route::prefix('{tenant}')->middleware('tenant')->group(function () {
     Route::get('/login', [TenantLoginController::class, 'showLoginForm'])->name('tenant.login');
     Route::post('/login', [TenantLoginController::class, 'login'])->name('tenant.login.submit');
     Route::post('/logout', [TenantLoginController::class, 'logout'])->name('tenant.logout');
-    
+
     // Registro de usuario en tenant
     Route::get('/register', [TenantRegisterController::class, 'showRegistrationForm'])->name('tenant.user.register');
     Route::post('/register', [TenantRegisterController::class, 'register'])->name('tenant.user.register.submit');
-    
+
     // Dashboard y otras rutas protegidas
     Route::middleware('tenant.auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('tenant.dashboard');
@@ -42,4 +42,4 @@ Route::middleware(['web', 'guest', 'first.user'])->group(function () {
     Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard');

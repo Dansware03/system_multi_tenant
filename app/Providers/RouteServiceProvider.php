@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/dashboard';
 
     // Añade esta propiedad:
     public const LOGIN = '/login';
@@ -35,10 +35,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
-    
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
-                
+
             Route::middleware('web')
                 ->group(base_path('routes/admin.php'));
         });
