@@ -32,3 +32,14 @@ Route::prefix('{tenant}')->middleware('tenant')->group(function () {
         // Añade aquí más rutas protegidas
     });
 });
+Auth::routes([
+    'register' => false, // Desactivamos el registro público
+]);
+
+// Ruta especial para el primer registro
+Route::middleware(['web', 'guest', 'first.user'])->group(function () {
+    Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

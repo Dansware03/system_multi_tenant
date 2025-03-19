@@ -66,5 +66,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'tenant' => \App\Http\Middleware\TenantMiddleware::class,
         'tenant.auth' => \App\Http\Middleware\TenantAuth::class,
+        'admin' => \App\Http\Middleware\CheckRole::class . ':admin,root',
+        'root' => \App\Http\Middleware\CheckRole::class . ':root',
+        'first.user' => \App\Http\Middleware\CheckIfFirstUser::class
     ];
 }
