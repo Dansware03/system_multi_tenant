@@ -21,6 +21,9 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if ($guard === 'tenant') {
+                    return redirect()->route('tenant.dashboard', ['tenant' => app('tenant')->slug]);
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }
